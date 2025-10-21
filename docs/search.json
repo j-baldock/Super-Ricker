@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Superimposition and Ricker b",
+    "section": "",
+    "text": "1 Introduction\nThis book provides a visual story of efforts to quantify the influence of habitat quality on rates of superimposition and strength of density-dependence (Ricker b) for Yellowstone cutthroat trout (YCT). All redd count data was collected by the Wyoming Game and Fish Department. This project builds off of previous efforts to quantify the effects of changing climate and water management on population productivity of YCT.\nAccess the GitHub repo here: https://github.com/j-baldock/Super-Ricker\nThis information is preliminary or provisional and is subject to revision. It is being provided to meet the need for timely best science. The information has not received final approval by the U.S. Geological Survey (USGS) and is provided on the condition that neither the USGS nor the U.S. Government shall be held liable for any damages resulting from the authorized or unauthorized use of the information.\nProject team: Jeff Baldock (ORISE; USGS, NOROCK) & Tim Cline (MSU)\n\n\nSession Information\n\n\n\n\n\nCode\nsessionInfo()\n\n\nR version 4.5.1 (2025-06-13 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 22631)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=English_United States.utf8 \n[2] LC_CTYPE=English_United States.utf8   \n[3] LC_MONETARY=English_United States.utf8\n[4] LC_NUMERIC=C                          \n[5] LC_TIME=English_United States.utf8    \n\ntime zone: America/Denver\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.5.1    fastmap_1.2.0     cli_3.6.5        \n [5] tools_4.5.1       htmltools_0.5.8.1 rstudioapi_0.17.1 rmarkdown_2.29   \n [9] knitr_1.50        jsonlite_2.0.0    xfun_0.53         digest_0.6.37    \n[13] rlang_1.1.6       evaluate_1.0.5",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "exploredata.html",
+    "href": "exploredata.html",
+    "title": "2  Explore data",
+    "section": "",
+    "text": "2.1 Load data\nRedd count data\nCode\ndat_rc &lt;- read_csv(\"data/ReddCounts_WGFD_1971-2021_cleaned.csv\") %&gt;%\n  filter(!stream %in% c(\"Cody\", \"Christiansen\", \"Dave\", \"Laker\")) %&gt;% \n  mutate(sup = avgredds / clusters)\nhead(dat_rc)\n\n\n# A tibble: 6 × 16\n  stream     year date         doy miles   kms   lat  long clusters minredds\n  &lt;chr&gt;     &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 3 Channel  1973 1973-07-02   183  2.61  4.20  43.6 -111.       81      130\n2 3 Channel  1974 1974-07-02   183  2.61  4.20  43.6 -111.      106      144\n3 3 Channel  1975 1975-07-18   199  2.61  4.20  43.6 -111.       84       NA\n4 3 Channel  1976 1976-07-07   189  2.61  4.20  43.6 -111.      246      293\n5 3 Channel  1977 1977-07-06   187  2.61  4.20  43.6 -111.      229      323\n6 3 Channel  1978 1978-07-18   199  2.61  4.20  43.6 -111.      193      305\n# ℹ 6 more variables: maxredds &lt;dbl&gt;, avgredds &lt;dbl&gt;, ttrout &lt;dbl&gt;,\n#   reddspermile &lt;dbl&gt;, reddsperkm &lt;dbl&gt;, sup &lt;dbl&gt;",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Explore data</span>"
+    ]
+  },
+  {
+    "objectID": "exploredata.html#visualize",
+    "href": "exploredata.html#visualize",
+    "title": "2  Explore data",
+    "section": "2.2 Visualize",
+    "text": "2.2 Visualize\n\n\nCode\ndat_rc %&gt;%\n  ggplot() +\n  geom_boxplot(aes(x = stream, y = sup), fill = \"grey80\") +\n  xlab(\"Population\") + ylab(\"Rate of superimposition\\n(avg. redds / clusters)\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Explore data</span>"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "hash": "b981faf049ac68071a4dcd22fee58c8c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Explore data\"\nformat: html\n---\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n:::\n\n\n## Load data\n\nRedd count data\n\n::: {.cell}\n\n```{.r .cell-code}\ndat_rc <- read_csv(\"data/ReddCounts_WGFD_1971-2021_cleaned.csv\") %>%\n  filter(!stream %in% c(\"Cody\", \"Christiansen\", \"Dave\", \"Laker\")) %>% \n  mutate(sup = avgredds / clusters)\nhead(dat_rc)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 6 × 16\n  stream     year date         doy miles   kms   lat  long clusters minredds\n  <chr>     <dbl> <date>     <dbl> <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>\n1 3 Channel  1973 1973-07-02   183  2.61  4.20  43.6 -111.       81      130\n2 3 Channel  1974 1974-07-02   183  2.61  4.20  43.6 -111.      106      144\n3 3 Channel  1975 1975-07-18   199  2.61  4.20  43.6 -111.       84       NA\n4 3 Channel  1976 1976-07-07   189  2.61  4.20  43.6 -111.      246      293\n5 3 Channel  1977 1977-07-06   187  2.61  4.20  43.6 -111.      229      323\n6 3 Channel  1978 1978-07-18   199  2.61  4.20  43.6 -111.      193      305\n# ℹ 6 more variables: maxredds <dbl>, avgredds <dbl>, ttrout <dbl>,\n#   reddspermile <dbl>, reddsperkm <dbl>, sup <dbl>\n```\n\n\n:::\n:::\n\n\n\n\n## Visualize\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndat_rc %>%\n  ggplot() +\n  geom_boxplot(aes(x = stream, y = sup), fill = \"grey80\") +\n  xlab(\"Population\") + ylab(\"Rate of superimposition\\n(avg. redds / clusters)\") +\n  theme_bw() + \n  theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))\n```\n\n::: {.cell-output-display}\n![](exploredata_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
