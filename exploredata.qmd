@@ -1,0 +1,32 @@
+---
+title: "Explore data"
+format: html
+---
+
+```{r}
+library(tidyverse)
+```
+
+## Load data
+
+Redd count data
+```{r}
+dat_rc <- read_csv("data/ReddCounts_WGFD_1971-2021_cleaned.csv") %>%
+  filter(!stream %in% c("Cody", "Christiansen", "Dave", "Laker")) %>% 
+  mutate(sup = avgredds / clusters)
+head(dat_rc)
+```
+
+
+
+## Visualize
+
+```{r}
+dat_rc %>%
+  ggplot() +
+  geom_boxplot(aes(x = stream, y = sup), fill = "grey80") +
+  xlab("Population") + ylab("Rate of superimposition\n(avg. redds / clusters)") +
+  theme_bw() + 
+  theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+```
+
